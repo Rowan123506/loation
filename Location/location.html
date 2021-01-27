@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Event Click LatLng</title>
+    <script src="https://maps.google.com/maps/api/js?key=AIzaSyB1iQc224uNagY41PtlMeOkdyZ40xhIH2sloadMap"></script>
+
+    <style type="text/css">
+        /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+        
+        #map {
+            height: 40%;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+
+    <script>
+        function inffd() {
+            var latlng = new google.maps.LatLng(51.4975941, -0.0803232);
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: latlng,
+                zoom: 11,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+            var marker = new google.maps.Marker({
+                position: latlng,
+                map: map,
+                title: 'Set lat/lon values for this property',
+                draggable: true
+            });
+
+            google.maps.event.addListener(marker, 'dragend', function(event) {
+                document.getElementById("latbox").value = this.getPosition().lat();
+                document.getElementById("lngbox").value = this.getPosition().lng();
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <div id="map">
+        <button onclick="inffd()"></button>
+    </div>
+    Lat: <input id="latbox" type="text"> Long:
+    <input id="lngbox" type="text">
+</body>
+
+</html>
